@@ -1,0 +1,157 @@
+#include <stdio.h>		//standart input output kütüphanesi
+#include <conio.h>		//return için küyüphane
+#include <time.h>    //random sayı üretmek için gerekli olan kütüphane
+#include <stdbool.h>
+#include <stdlib.h>
+int kontrol(int lamba[6])		//değerlerin tamamı 1 mi 0 mı diye kontrol eden fonksiyon
+{
+	int i,kontrol=0;
+	for(i=0;i<6;++i)		
+	{
+		if(lamba[i] == 0)		//eğer bir değer false yani 0'sa kontrol değişkenini -1 yapıp döngüyü durduruyor
+		{
+			kontrol = -1;		
+			break;
+		}
+	}
+	if(kontrol==0)				//kontrol değeri 0'sa fonksiyon geriye 1 döndürüyor
+	 return 1;
+	else						//kontrol değeri 0 değil ise fonksiyon geriye -1 döndürüyor
+	 return -1;
+}
+void sifirla(int lamba[6])
+{
+	int i;
+	for(i=0;i<6;++i)		
+	{
+		lamba[i] = 0;
+	}
+}
+int main()
+{			
+	int lamba[6];				//gelen değerleri tutan dizi
+	float sonuc;
+	int toplam;
+	int i,j=0,sayac,random,kntrl;
+	srand(time(NULL));			//random sayı üretmek için kullanılan fonksiyon. Saat değerine göre matematksel işlem yaparak sayı döndürüyor bu olmadan sürekli aynı sayıları döndürür
+	while(j<1001)
+	{
+		++sayac;				//kaç adımda bulduğunu hesaplamak için sayaç
+		random=rand() % 6 + 1;		// [1,6] arası rastgele sayı üretme
+		printf("%d\n",random);
+		switch(random )			
+		{
+			case 1:				//random sayı 1'se buraya giriyor	
+				if(lamba[0] == 0)		//0. lamba değeri 0 yani false ise bu if'e giriyor
+				{
+					lamba[0]=1;			//0. lamba değerini falseden true'ye çevirme
+						if(kontrol(lamba)==1)		//kontrol fonksiyonuna gidiyor ve geri dönen değer 1 ise bu if bloğuna giriyor
+						{
+							printf("TAMAMLANDI ->%d \n",sayac);		//sayaç değerini yazdırma
+						/*	for (int i = 0; i < 6; i++) {
+								printf("%d -> %d \n",i, lamba[i]);			tüm değerler 1 yani true mu diye kontrol amaçlı kullanılabilir
+							}*/
+							printf("\n");
+							kntrl=1;
+						}
+				}
+				else	//0. lamba değeri 1 yani true ise else bloğuna giriyor
+				{
+					lamba[0] = 0;	//0. lamba değerini true'den false çevirme
+				}
+				break;
+			case 2:				//random sayı 2 ise buraya giriyor
+				if(lamba[1] == 0)
+				{
+					lamba[1]=1;
+						if(kontrol(lamba)==1)
+						{
+							printf("TAMAMLANDI ->%d \n",sayac);
+							printf("\n");
+							kntrl=1;
+						}
+				}
+				else	
+				{
+					lamba[1] = 0;	
+				}
+				break;
+			case 3:		//random sayı 3'se buraya giriyor
+				if(lamba[2] == 0)
+				{
+					lamba[2]=1;
+						if(kontrol(lamba)==1)
+						{
+							printf("TAMAMLANDI ->%d \n",sayac);
+							printf("\n");
+							kntrl=1;
+						}
+				}
+				else	
+				{
+					lamba[2] = 0;	
+				}
+				break;
+			case 4:			//random sayı 4'se buraya giriyor
+				if(lamba[3] == 0)
+				{
+					lamba[3]=1;
+						if(kontrol(lamba)==1)
+						{
+							printf("TAMAMLANDI ->%d \n",sayac);
+							printf("\n");
+							kntrl=1;
+						}
+				}
+				else	
+				{
+					lamba[3] = 0;	
+				}
+				break;
+			case 5:  			//random sayı 5'se buraya giriyor
+				if(lamba[4] == 0)
+				{
+					lamba[4]=1;
+						if(kontrol(lamba)==1)
+						{
+							printf("TAMAMLANDI ->%d \n",sayac);
+							printf("\n");
+							kntrl=1;
+						}
+				}
+				else	
+				{
+					lamba[4] = 0;	
+				}
+				break;
+			case 6:				//random sayı 6 ise buraya giriyor
+				if(lamba[5] == 0)
+				{
+					lamba[5]=1;
+						if(kontrol(lamba)==1)
+						{
+							printf("TAMAMLANDI ->%d \n",sayac);	
+							printf("\n");
+							kntrl=1;
+						}
+				}
+				else	
+				{
+					lamba[5] = 0;	
+				}
+				break;
+			default:			// eğer random sayı [1,6] dışı bir sayı üreetirse bu bloğa giriyor
+				printf("HATA!!");
+		}
+		if(kntrl==1)
+		{
+			kntrl=0;
+			sifirla(lamba);
+			toplam += sayac;
+			++j;
+			sayac=0;
+		}
+	}
+	sonuc= toplam/1000;
+	printf("1000 Denemede gelen ortalama -> %.2f",sonuc);
+}
